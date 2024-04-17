@@ -39,6 +39,25 @@ const SellerDashboard = () => {
         lg={3}
         py={5}
         pr={{
+          md: 0,
+          lg: 3,
+        }}
+      >
+        <OverviewCard
+          title="Total Products"
+          Icon={UsersIcon}
+          difference={16}
+          positive={false}
+          value="1.6k"
+          backgroundColor="primary.main"
+        />
+      </Grid>
+      <Grid
+        xs={12}
+        sm={6}
+        lg={3}
+        py={5}
+        pr={{
           sx: 0,
           sm: 3,
           md: 3,
@@ -75,16 +94,7 @@ const SellerDashboard = () => {
           backgroundColor="success.main"
         />
       </Grid>
-      <Grid xs={12} sm={6} lg={3} py={5}>
-        <OverviewCard
-          title="Canceled Orders"
-          Icon={Product}
-          difference={15}
-          positive={false}
-          value="15"
-          backgroundColor="error.main"
-        />
-      </Grid>
+
       <Grid xs={12} lg={8} pr={3} pb={3}>
         <OverviewSales
           chartSeries={[
@@ -92,10 +102,10 @@ const SellerDashboard = () => {
               name: "This year",
               data: [18, 16, 5, 8, 3, 14, 14, 16, 17, 19, 18, 20],
             },
-            {
-              name: "Last year",
-              data: [12, 11, 4, 6, 2, 9, 9, 10, 11, 12, 13, 13],
-            },
+            // {
+            //   name: "Last year",
+            //   data: [12, 11, 4, 6, 2, 9, 9, 10, 11, 12, 13, 13],
+            // },
           ]}
           sx={{ height: "100%" }}
         />

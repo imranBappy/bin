@@ -248,7 +248,7 @@ const Users = () => {
   const [verification, setVerification] = useState("all");
   const [email, setEmail] = useState("");
   const LIMIT = 10;
-  const { data, loading, error, refetch, fetchMore } = useQuery(USERS_QUERY, {
+  const { data, loading, refetch, fetchMore } = useQuery(USERS_QUERY, {
     variables: {
       first: LIMIT,
       isActive: status === "all" ? null : status === "active",
@@ -357,7 +357,7 @@ const Users = () => {
                 >
                   <MenuItem value={"all"}>All</MenuItem>
                   <MenuItem value={"verified-seller"}>Verified</MenuItem>
-                  <MenuItem value={"non-verified-Seller"}>Un Verified</MenuItem>
+                  <MenuItem value={"unverified-seller"}>Un Verified</MenuItem>
                 </Select>
               </FormControl>
             </Box>
@@ -368,15 +368,17 @@ const Users = () => {
           </Box>
           <DataGrid
             columns={columns}
-            pageSize={LIMIT}
-            loading={loading}
             rows={data?.users?.edges || []}
+            paginationMode="server"
             slots={{ noRowsOverlay: CustomNoRowsOverlay }}
             getRowId={(row) => row.node.id}
+            pageSize={LIMIT}
+            loading={loading}
             pagination
             rowCount={Math.floor(totalCount / LIMIT)}
             onPageChange={handlePagination}
             disableRowSelectionOnClick={true}
+            rowsPerPageOptions={[LIMIT]}
           />
         </Box>
       </Container>
