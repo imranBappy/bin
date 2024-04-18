@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid } from "@mui/material";
-
 import { OverviewSales } from "@/sections/overview/overview-sales";
 import { OverviewTraffic } from "@/sections/overview/overview-traffic";
 import { OverviewLatestProducts } from "@/sections/overview/overview-latest-products";
@@ -12,13 +11,51 @@ import Product from "@mui/icons-material/Category";
 
 const now = new Date();
 
-const BuyerDashboard = () => {
+const AdminDashboard = () => {  
   return (
     <Grid container spacing={3}>
       <Grid
         xs={12}
         sm={6}
-        lg={4}
+        lg={3}
+        py={5}
+        pr={{
+          md: 0,
+          lg: 3,
+        }}
+      >
+        <OverviewCard
+          title="Total Customers"
+          Icon={UsersIcon}
+          difference={16}
+          positive={false}
+          value="1.6k"
+          backgroundColor="primary.main"
+        />
+      </Grid>
+      <Grid
+        xs={12}
+        sm={6}
+        lg={3}
+        py={5}
+        pr={{
+          md: 0,
+          lg: 3,
+        }}
+      >
+        <OverviewCard
+          title="Total Products"
+          Icon={UsersIcon}
+          difference={16}
+          positive={false}
+          value="1.6k"
+          backgroundColor="primary.main"
+        />
+      </Grid>
+      <Grid
+        xs={12}
+        sm={6}
+        lg={3}
         py={5}
         pr={{
           sx: 0,
@@ -27,12 +64,18 @@ const BuyerDashboard = () => {
           lg: 3,
         }}
       >
-        <OverviewCard title="Total Orders" Icon={Product} value="100" />
+        <OverviewCard
+          title="Total Orders"
+          Icon={Product}
+          difference={50}
+          positive={true}
+          value="100"
+        />
       </Grid>
       <Grid
         xs={12}
         sm={6}
-        lg={4}
+        lg={3}
         py={5}
         pr={{
           sx: 0,
@@ -45,18 +88,13 @@ const BuyerDashboard = () => {
         <OverviewCard
           title="Succeed Orders"
           Icon={Product}
+          difference={75}
+          positive={true}
           value="75"
           backgroundColor="success.main"
         />
       </Grid>
-      <Grid xs={12} sm={6} lg={4} py={5}>
-        <OverviewCard
-          title="Canceled Orders"
-          Icon={Product}
-          value="15"
-          backgroundColor="error.main"
-        />
-      </Grid>
+
       <Grid xs={12} lg={8} pr={3} pb={3}>
         <OverviewSales
           chartSeries={[
@@ -64,10 +102,10 @@ const BuyerDashboard = () => {
               name: "This year",
               data: [18, 16, 5, 8, 3, 14, 14, 16, 17, 19, 18, 20],
             },
-            {
-              name: "Last year",
-              data: [12, 11, 4, 6, 2, 9, 9, 10, 11, 12, 13, 13],
-            },
+            // {
+            //   name: "Last year",
+            //   data: [12, 11, 4, 6, 2, 9, 9, 10, 11, 12, 13, 13],
+            // },
           ]}
           sx={{ height: "100%" }}
         />
@@ -187,4 +225,4 @@ const BuyerDashboard = () => {
   );
 };
 
-export default BuyerDashboard;
+export default AdminDashboard;

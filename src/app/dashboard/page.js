@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useContext } from "react";
+import React from "react";
 import { Box, Container, Typography } from "@/common";
-import SellerDashboard from "@/component/Dashboard/SellerDashboard";
+import Dashboard from "@/component/Dashboard/AdminDashboard";
 
 const DashboardPage = ({ params }) => {
   return (
@@ -22,7 +22,7 @@ const DashboardPage = ({ params }) => {
             Welcome to the dashboard
           </Typography>
         </Box>
-        <SellerDashboard lang={params.locale} />
+        <Dashboard lang={params.locale} />
       </Container>
     </Box>
   );
