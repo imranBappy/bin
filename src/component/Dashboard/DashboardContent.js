@@ -28,6 +28,7 @@ const DashboardContent = ({ open, children }) => {
       open={open}
       sx={{
         minHeight: "100vh",
+        width: "100%",
       }}
     >
       {children}

@@ -74,15 +74,37 @@ function CustomNoRowsOverlay() {
     </StyledGridOverlay>
   );
 }
-const DataGrid = ({ columns, data, rows, loading = false, ...rest }) => {
+const DataGrid = ({
+  columns,
+  rows,
+  loading = false,
+  rowCount,
+  pageSize = 10,
+  page = 0,
+  onPaginationModelChange,
+  paginationModel = {
+    pageSize: 10,
+    page: 0,
+  },
+  ...rest
+}) => {
   return (
     <DataTable
-      columns={columns}
-      pageSize={10}
-      loading={loading}
+      style={{
+        height: "calc(100vh - 200px)",
+        width: "100%",
+      }}
       rows={rows}
+      columns={columns}
+      rowCount={rowCount}
+      loading={loading}
+      paginationMode="server"
+      disableColumnSelector={true}
+      disableRowSelectionOnClick={true}
+      paginationModel={paginationModel}
+      pagination={true}
+      onPaginationModelChange={onPaginationModelChange}
       slots={{ noRowsOverlay: CustomNoRowsOverlay }}
-      autoPageSize
       {...rest}
     />
   );

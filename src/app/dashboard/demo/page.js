@@ -3,7 +3,7 @@ import DemoComp from "./DemoComp";
 
 const page = () => {
   return (
-    <div style={{ width: "100%" }}>
+    <div style={{ width: "100%", marginTop:100 }}>
       <DemoComp />
     </div>
   );
