@@ -19,7 +19,7 @@ const Autocomplete = ({
       freeSolo={true}
       onInputChange={(event, value, reason) => {
         if (reason === "clear") {
-          rest?.onClearHandler();
+          if (rest?.onClearHandler) rest?.onClearHandler();
         }
       }}
       {...rest}

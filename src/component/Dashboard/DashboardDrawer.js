@@ -15,7 +15,6 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link } from "@/common";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useRouter, usePathname } from "next/navigation";
@@ -25,7 +24,8 @@ import CategoryIcon from "@mui/icons-material/Category";
 import LinearScaleIcon from "@mui/icons-material/LinearScale";
 import AdsClickIcon from "@mui/icons-material/AdsClick";
 import ElectricalServicesIcon from "@mui/icons-material/ElectricalServices";
-
+import DisplaySettingsIcon from "@mui/icons-material/DisplaySettings";
+import TocIcon from "@mui/icons-material/Toc";
 const buyerMenu = [
   {
     name: "Users",
@@ -72,6 +72,16 @@ const settingsMenu = [
     name: "Categories",
     icon: <CategoryIcon />,
     link: "/dashboard/categories",
+  },
+  {
+    name: "Specification",
+    icon: <TocIcon />,
+    link: "/dashboard/specification",
+  },
+  {
+    name: "Options",
+    icon: <DisplaySettingsIcon />,
+    link: "/dashboard/options",
   },
 ];
 
