@@ -45,15 +45,6 @@ const MyAds = () => {
   const totalCount = data?.products?.totalCount || 0;
   const products = data?.products?.edges || [];
 
-  const handlePagination = (event, value) => {
-    fetchMore({
-      variables: {
-        first: pageSize,
-        offset: (value - 1) * 10,
-        search: searchStr,
-      },
-    });
-  };
   const fetchMoreData = (page) => {
     const newOffset = pageSize * page;
     setOffset(newOffset);

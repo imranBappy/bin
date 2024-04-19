@@ -5,16 +5,18 @@ export const USERS_QUERY = gql`
     $first: Int
     $before: String
     $isActive: Boolean
+    $offset: Int
     $sellerStatus: String
     $email: String
   ) {
     users(
       first: $first
       before: $before
+      offset: $offset
       isActive: $isActive
       sellerStatus: $sellerStatus
       email: $email
-    ) @connection(key: "users", filter: ["isActive", "sellerStatus"]) {
+    ) {
       totalCount
       edges {
         node {

@@ -1,28 +1,25 @@
 "use client";
 import { useQuery } from "@apollo/client";
-import { Box, Card, Typography } from "@mui/material";
-import React from "react";
+import { Box, Card } from "@mui/material";
+import React, { useState } from "react";
 import { SPECIFICATIONS_QUERY } from "./graphql/query";
-import { DataGrid } from "@mui/x-data-grid";
-import { Button, Link } from "@/common";
+import { Button, Link, DataGrid } from "@/common";
 
 const OptionsTable = () => {
-  const PASE_SIZE = 10;
-  const { data, loading, fetchMore } = useQuery(SPECIFICATIONS_QUERY, {
+  const pageSize = 13;
+  const [offset, setOffset] = useState(0);
+  const [page, setPage] = useState(0);
+  const { data, loading } = useQuery(SPECIFICATIONS_QUERY, {
     variables: {
-      first: PASE_SIZE,
-      offset: 0,
+      first: pageSize,
+      offset: offset,
     },
   });
   const total = data?.specifications?.totalCount;
 
-  const handlePageChange = (page) => {
-    fetchMore({
-      variables: {
-        first: PASE_SIZE,
-        offset: page * PASE_SIZE,
-      },
-    });
+  const fetchMoreData = (page) => {
+    const newOffset = pageSize * page;
+    setOffset(newOffset);
   };
 
   return (
@@ -56,24 +53,28 @@ const OptionsTable = () => {
               renderCell: (params) => (
                 <Link href={`/dashboard/options/add?id=${params.row.id}`}>
                   <Button
-                  size="small"
-                  color="primary"
-                  onClick={() => {
-                    console.log(params.row.id);
-                  }}
-                >
-                  Edit
+                    size="small"
+                    color="primary"
+                    onClick={() => {
+                      console.log(params.row.id);
+                    }}
+                  >
+                    Edit
                   </Button>
                 </Link>
               ),
             },
           ]}
-          pageSize={PASE_SIZE}
           rowCount={total}
-          pagination
-          onPageChange={(page) => handlePageChange(page.page)}
           loading={loading}
-          autoHeight
+          paginationModel={{
+            pageSize: pageSize,
+            page: page,
+          }}
+          onPaginationModelChange={({ page, pageSize }) => {
+            fetchMoreData(page, pageSize);
+            setPage(page);
+          }}
         />
       </Box>
     </Card>

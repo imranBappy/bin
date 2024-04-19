@@ -1,30 +1,34 @@
 "use client";
 import { useQuery } from "@apollo/client";
 import { Box, Card } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { SPECIFICATIONS_CATEGORIES_QUERY } from "./graphql/query";
-import { DataGrid } from "@mui/x-data-grid";
 import images from "@/assets/images";
-import { Button, Link } from "@/common";
+import { Button, Link, DataGrid } from "@/common";
 
 const SpecificationsTable = () => {
-  const PASE_SIZE = 10;
+  const pageSize = 12;
+  const [offset, setOffset] = useState(0);
+  const [page, setPage] = useState(0);
   const { data, loading, fetchMore } = useQuery(
     SPECIFICATIONS_CATEGORIES_QUERY,
     {
       variables: {
-        first: PASE_SIZE,
-        offset: 0,
+        first: pageSize,
+        offset: offset,
       },
     }
   );
   const total = data?.specificationCategories?.totalCount;
-
+  const fetchMoreData = (page) => {
+    const newOffset = pageSize * page;
+    setOffset(newOffset);
+  };
   const handlePageChange = (page) => {
     fetchMore({
       variables: {
-        first: PASE_SIZE,
-        offset: page * PASE_SIZE,
+        first: pageSize,
+        offset: page * pageSize,
       },
     });
   };
@@ -118,12 +122,18 @@ const SpecificationsTable = () => {
               ),
             },
           ]}
-          pageSize={PASE_SIZE}
+ 
           rowCount={total}
-          pagination
-          onPageChange={(page) => handlePageChange(page.page)}
+         
           loading={loading}
-          autoHeight
+          paginationModel={{
+            pageSize: pageSize,
+            page: page,
+          }}
+          onPaginationModelChange={({ page, pageSize }) => {
+            fetchMoreData(page, pageSize);
+            setPage(page);
+          }}
         />
       </Box>
     </Card>
