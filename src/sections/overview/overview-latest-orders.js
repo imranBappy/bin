@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@mui/material";
 import Scrollbar from "@/component/Scrollbar/Scrollbar";
-import SeverityPill from "@/component/SeverityPill/severity-pill";
+import Link from "next/link";
 
 const statusMap = {
   pending: "warning",
@@ -38,23 +38,20 @@ export const OverviewLatestOrders = (props) => {
                 <TableCell>Order</TableCell>
                 <TableCell>Customer</TableCell>
                 <TableCell sortDirection="desc">Date</TableCell>
-                <TableCell>Status</TableCell>
+                <TableCell>Total Amount</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders.map((order) => {
+              {orders.map((item) => {
+                const order = item.node;
                 const createdAt = format(order.createdAt, "dd/MM/yyyy");
 
                 return (
                   <TableRow hover key={order.id}>
-                    <TableCell>{order.ref}</TableCell>
-                    <TableCell>{order.customer.name}</TableCell>
+                    <TableCell>{order.id}</TableCell>
+                    <TableCell>{order.fullName}</TableCell>
                     <TableCell>{createdAt}</TableCell>
-                    <TableCell>
-                      <SeverityPill color={statusMap[order.status]}>
-                        {order.status}
-                      </SeverityPill>
-                    </TableCell>
+                    <TableCell>{order.totalAmount}</TableCell>
                   </TableRow>
                 );
               })}
@@ -74,7 +71,16 @@ export const OverviewLatestOrders = (props) => {
           size="small"
           variant="text"
         >
-          View all
+          <Link
+            href={`/dashboard/orders`}
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+            }}
+            passHref={true}
+          >
+            View all
+          </Link>
         </Button>
       </CardActions>
     </Card>

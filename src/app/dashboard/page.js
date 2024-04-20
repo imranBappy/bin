@@ -1,6 +1,4 @@
-"use client";
 
-import React from "react";
 import { Box, Container, Typography } from "@/common";
 import Dashboard from "@/component/Dashboard/AdminDashboard";
 

@@ -45,11 +45,6 @@ const generalMenu = [
     icon: <DashboardIcon />,
     link: "/dashboard",
   },
-  // {
-  //   name: "My Profile",
-  //   icon: <AccountCircleIcon />,
-  //   link: "/dashboard/profile",
-  // },
 ];
 
 const settingsMenu = [
@@ -82,6 +77,12 @@ const settingsMenu = [
     name: "Options",
     icon: <DisplaySettingsIcon />,
     link: "/dashboard/options",
+  },
+
+  {
+    name: "Contact",
+    icon: <DisplaySettingsIcon />,
+    link: "/dashboard/contact",
   },
 ];
 
