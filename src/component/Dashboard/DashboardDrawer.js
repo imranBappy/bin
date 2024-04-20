@@ -26,6 +26,7 @@ import AdsClickIcon from "@mui/icons-material/AdsClick";
 import ElectricalServicesIcon from "@mui/icons-material/ElectricalServices";
 import DisplaySettingsIcon from "@mui/icons-material/DisplaySettings";
 import TocIcon from "@mui/icons-material/Toc";
+import { Report } from "@mui/icons-material";
 const buyerMenu = [
   {
     name: "Users",
@@ -78,11 +79,10 @@ const settingsMenu = [
     icon: <DisplaySettingsIcon />,
     link: "/dashboard/options",
   },
-
   {
-    name: "Contact",
-    icon: <DisplaySettingsIcon />,
-    link: "/dashboard/contact",
+    name: "Reports",
+    icon: <Report />,
+    link: "/dashboard/reports",
   },
 ];
 
