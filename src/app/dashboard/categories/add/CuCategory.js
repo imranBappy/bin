@@ -163,7 +163,7 @@ const CuCategory = () => {
 
             <TextField
               id="outlined-basic"
-              label="Service Name"
+              label="Category Name"
               variant="outlined"
               value={name}
               onChange={(e) => setName(e.target.value)}

@@ -15,19 +15,21 @@ const CuOption = () => {
   const searchQuery = useSearchParams();
   const router = useRouter();
 
-  const [createCategory, { loading: createCategoryLoading }] = useMutation(
+  const [createOption, { loading: createOptionLoading }] = useMutation(
     OPTION_MUTATION,
     {
       onCompleted: (data) => {
         toast.success(data.specificationCreateUpdate.message);
         setName("");
-        if ("Updated successfully.") {
+        if (
+          data.specificationCreateUpdate.message === "Updated successfully."
+        ) {
           router.push("/dashboard/options");
         }
       },
       onError: (error) => {
         console.log(error);
-        toast.error("Error adding category");
+        toast.error(error.message);
       },
     }
   );
@@ -58,11 +60,11 @@ const CuOption = () => {
     setError("");
     const catId = searchQuery.get("id");
     if (catId) {
-      createCategory({
+      createOption({
         variables: {
           input: {
             id: catId,
-            name: name,
+            name: name?.toLowerCase(),
           },
         },
       });
@@ -70,10 +72,10 @@ const CuOption = () => {
       return;
     }
 
-    createCategory({
+    createOption({
       variables: {
         input: {
-          name: name,
+          name: name?.toLowerCase(),
         },
       },
     });
@@ -114,7 +116,7 @@ const CuOption = () => {
         variant="contained"
         color="primary"
         type="submit"
-        disabled={createCategoryLoading}
+        disabled={createOptionLoading}
       >
         Add Option
       </Button>

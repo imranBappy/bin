@@ -22,13 +22,21 @@ const Autocomplete = ({
           if (rest?.onClearHandler) rest?.onClearHandler();
         }
       }}
+      sx={{
+        textTransform: "capitalize",
+      }}
       {...rest}
       renderInput={(params) => (
         <TextField
-          onChange={(e) => rest?.onChangeHandler(e.target.value)}
+          onChange={(e) =>
+            rest?.onChangeHandler ? rest?.onChangeHandler(e.target.value) : null
+          }
           label={label}
           error={error}
           helperText={helperText}
+          style={{
+            textTransform: "capitalize",
+          }}
           {...params}
         />
       )}
