@@ -79,6 +79,7 @@ const MyAds = () => {
         name: rawSpecification[key],
       });
     });
+    if (!product) return toast.error("Product not found");
 
     updateProduct({
       variables: {
@@ -178,11 +179,6 @@ const MyAds = () => {
               gap: "10px",
             }}
           >
-            <Link href={`/en/dashboard/post-ads/${params.id}`} passHref>
-              <Button color="primary" variant="contained" size="small">
-                Edit
-              </Button>
-            </Link>
             <Button
               color={params.value ? "success" : "error"}
               variant={params.value ? "outlined" : "contained"}

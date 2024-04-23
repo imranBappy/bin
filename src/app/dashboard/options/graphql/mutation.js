@@ -1,7 +1,7 @@
 const { gql } = require("@apollo/client");
 
 const OPTION_MUTATION = gql`
-  mutation MyMutation($input: SpecificationInput!) {
+  mutation MyMutation($input: AdminSpecificationInput!) {
     specificationCreateUpdate(input: $input) {
       message
     }

@@ -6,7 +6,7 @@ import { useLazyQuery, useMutation } from "@apollo/client";
 import { OPTION_MUTATION } from "../graphql/mutation";
 import toast from "react-hot-toast";
 import { useRouter, useSearchParams } from "next/navigation";
-import { OPTION_QUERY, SPECIFICATIONS_QUERY } from "../graphql/query";
+import { OPTION_QUERY } from "../graphql/query";
 import Loader from "@/common/Loader";
 
 const CuOption = () => {
