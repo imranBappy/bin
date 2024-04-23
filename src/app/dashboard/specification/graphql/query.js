@@ -1,12 +1,19 @@
 const { gql } = require("@apollo/client");
 
 export const SPECIFICATIONS_CATEGORIES_QUERY = gql`
-  query MyQuery($offset: Int, $id: ID, $first: Int, $orderBy: String) {
+  query MyQuery(
+    $offset: Int
+    $id: ID
+    $first: Int
+    $orderBy: String
+    $category: String
+  ) {
     specificationCategories(
       offset: $offset
       id: $id
       first: $first
       orderBy: $orderBy
+      category: $category
     ) {
       totalCount
       edges {

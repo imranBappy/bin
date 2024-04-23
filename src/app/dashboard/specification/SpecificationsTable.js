@@ -4,33 +4,35 @@ import { Box, Card } from "@mui/material";
 import React, { useState } from "react";
 import { SPECIFICATIONS_CATEGORIES_QUERY } from "./graphql/query";
 import images from "@/assets/images";
-import { Button, Link, DataGrid } from "@/common";
+import { Button, Link, DataGrid, Autocomplete } from "@/common";
+import { CATEGORY_QUERY } from "../categories/graphql/query";
 
 const SpecificationsTable = () => {
-  const pageSize = 12;
+  const pageSize = 13;
   const [offset, setOffset] = useState(0);
   const [page, setPage] = useState(0);
-  const { data, loading, fetchMore } = useQuery(
-    SPECIFICATIONS_CATEGORIES_QUERY,
-    {
-      variables: {
-        first: pageSize,
-        offset: offset,
-      },
-    }
+  const [category, setCategory] = useState(null);
+  const { data, loading } = useQuery(SPECIFICATIONS_CATEGORIES_QUERY, {
+    variables: {
+      first: pageSize,
+      offset: offset,
+      category: category?.id || null,
+    },
+  });
+
+  const { data: categoryData } = useQuery(CATEGORY_QUERY);
+
+  const categories = categoryData?.category?.subCategories?.edges?.map(
+    (edge) => ({
+      id: edge.node.id,
+      label: edge.node.name,
+    })
   );
+
   const total = data?.specificationCategories?.totalCount;
   const fetchMoreData = (page) => {
     const newOffset = pageSize * page;
     setOffset(newOffset);
-  };
-  const handlePageChange = (page) => {
-    fetchMore({
-      variables: {
-        first: pageSize,
-        offset: page * pageSize,
-      },
-    });
   };
 
   return (
@@ -41,6 +43,29 @@ const SpecificationsTable = () => {
       }}
     >
       <Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+          pb={2}
+        >
+          <Autocomplete
+            id="category"
+            name="category"
+            options={categories || []}
+            getOptionLabel={(option) => option.label}
+            onChange={(e, newValue) => {
+              setCategory(newValue || null);
+            }}
+            value={category}
+            label={"Category filter"}
+            placeholder="Category"
+            style={{ width: "400px" }}
+          />
+        </Box>
+
         <DataGrid
           rows={
             data?.specificationCategories?.edges?.map((edge, i) => ({
@@ -122,9 +147,7 @@ const SpecificationsTable = () => {
               ),
             },
           ]}
- 
           rowCount={total}
-         
           loading={loading}
           paginationModel={{
             pageSize: pageSize,
