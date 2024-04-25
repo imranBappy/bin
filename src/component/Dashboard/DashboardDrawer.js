@@ -103,7 +103,7 @@ const DashboardDrawer = ({ open, handleDrawerClose, lang }) => {
   const handleLogout = () => {
     toast.success("Logged out successfully");
     router.push(`/login`);
-    localStorage.removeItem("token");
+    localStorage.removeItem("admin-token");
   };
   return (
     <Drawer

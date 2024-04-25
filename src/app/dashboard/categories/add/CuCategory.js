@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Box, Button, Container, Image, TextField, Typography } from "@/common";
-import { Card } from "@mui/material";
+import { Box, Button, Image, TextField } from "@/common";
 import images from "@/assets/images";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { CATEGORY_MUTATION } from "../graphql/mutation";
@@ -26,7 +25,6 @@ const CuCategory = () => {
     CATEGORY_MUTATION,
     {
       onCompleted: (data) => {
-        console.log(data);
         toast.success(data.categorySubCategoryCreateUpdate.message);
         setName("");
         setImage({
@@ -39,7 +37,7 @@ const CuCategory = () => {
       },
       onError: (error) => {
         console.log(error);
-        toast.error("Error adding category");
+        toast.error(error.message);
       },
     }
   );
@@ -81,7 +79,7 @@ const CuCategory = () => {
             image: image.file
               ? await handleUploadMediaToBucket(image.file)
               : image.url,
-            parent: "4",
+            parent: "1",
           },
         },
       });
@@ -100,7 +98,7 @@ const CuCategory = () => {
         input: {
           name: name,
           image: imageUrl,
-          parent: "4",
+          parent: "1",
         },
       },
     });
@@ -117,70 +115,68 @@ const CuCategory = () => {
 
   if (getCategoryLoading) return <Loader />;
   return (
-   
-          <form
-            onSubmit={handleSubmit}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              alignContent: "center",
-              gap: "20px",
+    <form
+      onSubmit={handleSubmit}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignContent: "center",
+        gap: "20px",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <label htmlFor="contained-button-file">
+          <input
+            id="contained-button-file"
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              setImage({
+                url: URL.createObjectURL(e.target.files[0]),
+                file: e.target.files[0],
+              });
             }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <label htmlFor="contained-button-file">
-                <input
-                  id="contained-button-file"
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => {
-                    setImage({
-                      url: URL.createObjectURL(e.target.files[0]),
-                      file: e.target.files[0],
-                    });
-                  }}
-                  style={{ display: "none" }}
-                />
-                <Image
-                  width={200}
-                  height={200}
-                  src={image.url || images.UPLOAD_PLACEHOLDER}
-                  alt="category"
-                  style={{
-                    borderRadius: "50%",
-                    cursor: "pointer",
-                  }}
-                />
-              </label>
-            </Box>
+            style={{ display: "none" }}
+          />
+          <Image
+            width={200}
+            height={200}
+            src={image.url || images.UPLOAD_PLACEHOLDER}
+            alt="category"
+            style={{
+              borderRadius: "50%",
+              cursor: "pointer",
+            }}
+          />
+        </label>
+      </Box>
 
-            <TextField
-              id="outlined-basic"
-              label="Category Name"
-              variant="outlined"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              error={Boolean(error)}
-              helperText={error}
-            />
+      <TextField
+        id="outlined-basic"
+        label="Category Name"
+        variant="outlined"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        error={Boolean(error)}
+        helperText={error}
+      />
 
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              disabled={createCategoryLoading}
-            >
-              Add Service
-            </Button>
-          </form>
-     
+      <Button
+        variant="contained"
+        color="primary"
+        type="submit"
+        disabled={createCategoryLoading}
+      >
+        Add Service
+      </Button>
+    </form>
   );
 };
 

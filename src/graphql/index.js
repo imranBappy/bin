@@ -3,17 +3,14 @@ import { ApolloClient, HttpLink, InMemoryCache, from } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
 import { relayStylePagination } from "@apollo/client/utilities";
-import Cookies from "js-cookie";
 
 const authLink = setContext((_, { headers }) => {
   let token;
   if (typeof window !== "undefined") {
-    // Perform localStorage action
-    const storedToken = Cookies.get("token");
-    token = storedToken != null ? storedToken : "";
+    if (localStorage.getItem("admin-token")) {
+      token = JSON.parse(localStorage.getItem("admin-token")).accessToken;
+    }
   }
-  token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcl9pZCI6IjEiLCJzZWNyZXRfa2V5IjoiMTkzNzczMzc1MCJ9.t-KOxllAl-3HjKuvTrQX_3CFZJPvK9r_bG8nK5JU7Kw";
 
   return {
     headers: {
@@ -33,8 +30,7 @@ const errorLink = onError(
           message === "You are not authorized user." ||
           message === "Unauthorized user!"
         ) {
-          Cookies.remove("token");
-          Cookies.remove("role");
+          localStorage.removeItem("admin-token");
         }
       });
     }

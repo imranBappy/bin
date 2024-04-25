@@ -5,18 +5,18 @@ const useAuth = () => {
   const [isLoading, setIsLoading] = useState(true);
   const login = (user) => {
     if (user) {
-      localStorage.setItem("token", JSON.stringify(user));
+      localStorage.setItem("admin-token", JSON.stringify(user));
       setUser(user);
     }
   };
   const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("admin-token");
     setUser(null);
   };
 
   useEffect(() => {
     setIsLoading(true);
-    const userInfo = localStorage.getItem("token");
+    const userInfo = localStorage.getItem("admin-token");
     setUser(userInfo ? JSON.parse(userInfo) : null);
     setIsLoading(false);
   }, []);
