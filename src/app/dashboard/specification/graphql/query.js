@@ -52,7 +52,7 @@ export const SPECIFICATIONS_CATEGORY_QUERY = gql`
         }
       }
     }
-    category(id: "4") {
+    category(id: "1") {
       subCategories {
         totalCount
         edges {
