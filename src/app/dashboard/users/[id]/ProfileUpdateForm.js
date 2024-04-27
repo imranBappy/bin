@@ -9,7 +9,11 @@ import {
 } from "@/common";
 import { getDistrict, getDivision, getSubDistrict } from "@/utils/getAddress";
 
-const ProfileUpdateForm = ({ formik, loading }) => {
+const ProfileUpdateForm = ({ formik }) => {
+
+
+  
+
   return (
     <Grid item xs={12} sm={12} md={9} lg={9} xl={9}>
       <Box

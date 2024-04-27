@@ -9,7 +9,7 @@ const UserDetails = ({ params }) => {
       <Container maxWidth="xl">
         <Box display={"flex"} flexDirection={"column"} gap={5}>
           <ProfileView params={params} />
-          <UserProducts />
+          {/* <UserProducts /> */}
         </Box>
       </Container>
     </Box>

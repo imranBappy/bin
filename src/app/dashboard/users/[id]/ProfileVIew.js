@@ -15,8 +15,9 @@ const ProfileView = ({ params }) => {
       email: "",
       phone: "",
       address: "",
-      district: "",
-      subDistrict: "",
+      division: null,
+      district: null,
+      subDistrict: null,
       zipCode: "",
       profileImage: "",
     },
@@ -31,18 +32,24 @@ const ProfileView = ({ params }) => {
         email: user?.email,
         phone: user?.phone,
         address: user?.address,
-        division: {
-          label: user?.division?.name,
-          id: user?.division?.id,
-        },
-        district: {
-          label: user?.district?.name,
-          id: user?.district?.id,
-        },
-        subDistrict: {
-          label: user?.subDistrict?.name,
-          id: user?.subDistrict?.id,
-        },
+        division: user?.division?.id
+          ? {
+              label: user?.division?.name,
+              id: user?.division?.id,
+            }
+          : null,
+        district: user?.district?.id
+          ? {
+              label: user?.district?.name,
+              id: user?.district?.id,
+            }
+          : null,
+        subDistrict: user?.subDistrict?.id
+          ? {
+              label: user?.subDistrict?.name,
+              id: user?.subDistrict?.id,
+            }
+          : null,
         zipCode: user?.zipCode,
         profileImage: user?.profilePic,
       });

@@ -103,7 +103,6 @@ const AdminDashboard = () => {
           sx: 0,
           sm: 3,
           md: 3,
-
           lg: 3,
         }}
       >
@@ -139,12 +138,7 @@ const AdminDashboard = () => {
           sx={{}}
         />
       </Grid>
-      {/* <Grid pl={3} xs={12} md={12} lg={8} sx={{}}>
-        <OverviewLatestOrders
-          sx={{ height: 500 }}
-          orders={data?.orders?.edges || []}
-        />
-      </Grid> */}
+      
     </Grid>
   );
 };

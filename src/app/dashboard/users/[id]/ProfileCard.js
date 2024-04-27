@@ -11,7 +11,6 @@ const ProfileCard = ({
   sellerStatus,
   loadingverify,
 }) => {
-  console.log(sellerStatus);
   return (
     <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
       <Box
@@ -83,7 +82,7 @@ const ProfileCard = ({
                   textTransform: "capitalize",
                 }}
               >
-                Admin
+                Seller
               </span>
             </Typography>
             <Typography

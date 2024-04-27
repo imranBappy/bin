@@ -88,6 +88,7 @@ const columns = [
             padding: "5px 10px",
             borderRadius: "5px",
             cursor: "pointer",
+            color: params.row.node.isActive ? "green" : "red",
           }}
         >
           {params.row.node.isActive ? "Active" : "Inactive"}
@@ -123,7 +124,7 @@ const columns = [
     field: "email",
     headerName: "Email",
     type: "number",
-    minWidth: 100,
+    minWidth: 250,
     renderCell: (params) => {
       return (
         <strong
