@@ -1,6 +1,5 @@
 const { gql } = require("@apollo/client");
 
-
 export const REPORTS_QUERY = gql`
   query MyQuery(
     $first: Int
@@ -51,6 +50,23 @@ export const REPORTS_QUERY = gql`
             title
           }
         }
+      }
+    }
+  }
+`;
+
+export const REPORT_QUERY = gql`
+  query MyQuery($id: ID!) {
+    productReport(id: $id) {
+      createdAt
+      details
+      id
+      investigationNote
+      status
+      updatedAt
+      product {
+        id
+        name
       }
     }
   }

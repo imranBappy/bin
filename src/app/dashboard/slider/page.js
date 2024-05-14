@@ -11,7 +11,6 @@ const Slider = () => {
   const { data, refetch } = useQuery(ALL_BANNER_AND_ADS_QUERY, {
     variables: { isAds: false, isActive: true },
   });
-
   return (
     <Box my={8}>
       <Container maxWidth="xl">

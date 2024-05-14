@@ -3,9 +3,9 @@ import { useQuery } from "@apollo/client";
 import { Box, Card } from "@mui/material";
 import React, { useState } from "react";
 import { REPORTS_QUERY } from "./graphql/query";
-import { DataGrid } from "@/common";
+import { DataGrid, Link } from "@/common";
 
-const ReportsTable = () => {
+const ReportsTable = ({ locale }) => {
   const pageSize = 13;
   const [offset, setOffset] = useState(0);
   const [page, setPage] = useState(0);
@@ -46,17 +46,37 @@ const ReportsTable = () => {
             {
               field: "index",
               headerName: "Index",
-              width: 150,
+              width: 50,
             },
-            { field: "id", headerName: "ID", width: 90 },
+            {
+              field: "id",
+              headerName: "ID",
+              width: 50,
+              renderCell: (params) => (
+                <Link href={`/dashboard/reports/${params.row.id}`}>
+                  {params.value}
+                </Link>
+              ),
+            },
             {
               field: "productId",
               headerName: "Product Id",
+              width: 80,
+              renderCell: (params) => (
+                <Link href={`/dashboard/reports/${params.row.id}`}>
+                  {params.value}
+                </Link>
+              ),
             },
             {
               field: "productName",
               headerName: "Product Name",
               width: 150,
+              renderCell: (params) => (
+                <Link href={`/dashboard/reports/${params.row.id}`}>
+                  {params.value}
+                </Link>
+              ),
             },
             {
               field: "details",

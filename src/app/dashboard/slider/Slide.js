@@ -42,6 +42,7 @@ const Slide = ({ link, refetch, id }) => {
       });
     } catch (error) {
       console.error(error);
+      toast.error("Error uploading image");
     }
   };
 
@@ -68,7 +69,7 @@ const Slide = ({ link, refetch, id }) => {
         />
 
         <label
-          htmlFor="contained-button-file"
+          htmlFor={`contained-button-file-${id}`}
           style={{
             marginTop: "20px",
             width: "100%",
@@ -80,7 +81,7 @@ const Slide = ({ link, refetch, id }) => {
             <input
               type="file"
               accept="image/*"
-              id="contained-button-file"
+              id={`contained-button-file-${id}`}
               style={{ display: "none" }}
               onChange={handleImpageUpload}
             />

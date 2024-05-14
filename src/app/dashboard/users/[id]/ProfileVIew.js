@@ -26,7 +26,6 @@ const ProfileView = ({ params }) => {
     variables: { id: params?.id },
     onCompleted: (data) => {
       const user = data?.user;
-
       formik.setValues({
         name: user?.name,
         email: user?.email,
@@ -55,7 +54,7 @@ const ProfileView = ({ params }) => {
       });
     },
   });
-  const [verify, { loading: loadingverify }] = useMutation(
+  const [actionSubmit, { loading: loadingverify }] = useMutation(
     VERIFY_USER_MUTATION,
     {
       onCompleted: () => {
@@ -65,10 +64,20 @@ const ProfileView = ({ params }) => {
   );
 
   const handleVerify = () => {
-    verify({
+    actionSubmit({
       variables: {
         action: true,
         actionFor: "seller",
+        userId: params?.id,
+      },
+    });
+  };
+
+  const handleActive = () => {
+    actionSubmit({
+      variables: {
+        action: !data?.user?.isActive,
+        actionFor: "active",
         userId: params?.id,
       },
     });
@@ -86,7 +95,13 @@ const ProfileView = ({ params }) => {
           profileImage={formik.values.profileImage}
           sellerStatus={data?.user?.sellerStatus}
         />
-        <ProfileUpdateForm formik={formik} loading={loading} params={params} />
+        <ProfileUpdateForm
+          isActive={data?.user?.isActive}
+          formik={formik}
+          loading={loading}
+          params={params}
+          handleActive={handleActive}
+        />
       </Grid>
     </Box>
   );

@@ -9,11 +9,7 @@ import {
 } from "@/common";
 import { getDistrict, getDivision, getSubDistrict } from "@/utils/getAddress";
 
-const ProfileUpdateForm = ({ formik }) => {
-
-
-  
-
+const ProfileUpdateForm = ({ formik, handleActive, isActive }) => {
   return (
     <Grid item xs={12} sm={12} md={9} lg={9} xl={9}>
       <Box
@@ -166,7 +162,11 @@ const ProfileUpdateForm = ({ formik }) => {
             />
           </Box>
           <Box>
-            <Button variant="contained" color="warning">
+            <Button
+              variant="contained"
+              color={isActive ? "success" : "error"}
+              onClick={handleActive}
+            >
               Make Active
             </Button>
           </Box>
